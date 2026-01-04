@@ -1,0 +1,73 @@
+{
+  "app": {
+    "title": "关系法庭",
+    "description": "平静解决冲突的安全空间"
+  },
+  "nav": {
+    "dashboard": "仪表板",
+    "newCase": "新建案件",
+    "about": "关于",
+    "settings": "设置",
+    "darkMode": "暗色模式",
+    "lightMode": "亮色模式"
+  },
+  "home": {
+    "welcome": "欢迎来到关系法庭",
+    "description": "这个平台帮助您组织困难的对话，理解不同观点，找到建设性的解决方案。",
+    "startCase": "开始新案件",
+    "totalCases": "总案件数",
+    "resolved": "已解决",
+    "active": "进行中",
+    "recentCases": "最近案件"
+  },
+  "case": {
+    "title": "开始新案件",
+    "issue": "问题或冲突是什么？",
+    "yourPerspective": "您的观点",
+    "theirPerspective": "对方的观点（如果知道）",
+    "optionalNote": "可选 - 如果不知道对方的观点可以留空",
+    "cancel": "取消",
+    "submit": "提交案件",
+    "confirmCancel": "您有未保存的更改。确定要取消吗？",
+    "success": {
+      "created": "案件创建成功！"
+    },
+    "errors": {
+      "issueRequired": "请描述问题",
+      "perspectiveRequired": "请分享您的观点",
+      "generic": "创建案件失败，请重试。"
+    }
+  },
+  "verdict": {
+    "title": "关系法庭裁决",
+    "caseDetails": "案件详情",
+    "issue": "问题",
+    "yourPerspective": "您的观点",
+    "theirPerspective": "对方观点",
+    "resolution": "解决方案",
+    "recommendation": "建议",
+    "courtsNotes": "法庭备注",
+    "newCase": "开始新案件",
+    "back": "返回仪表板"
+  },
+  "about": {
+    "title": "关于",
+    "content": "关系法庭帮助人们以冷静、结构化、公平的方式解决冲突。"
+  },
+  "settings": {
+    "title": "设置",
+    "language": "语言",
+    "theme": "主题",
+    "data": "数据管理",
+    "export": {
+      "success": "数据导出成功",
+      "error": "导出数据失败"
+    },
+    "clear": {
+      "success": "所有数据已清除",
+      "description": "正在跳转到首页...",
+      "error": "清除数据失败",
+      "confirm": "确定吗？这将永久删除您的所有案件。此操作无法撤销。"
+    }
+  }
+}

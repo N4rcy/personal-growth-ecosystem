@@ -1,0 +1,73 @@
+{
+  "app": {
+    "title": "Relationship Court",
+    "description": "A safe space to resolve conflicts calmly"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "newCase": "New Case",
+    "about": "About",
+    "settings": "Settings",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode"
+  },
+  "home": {
+    "welcome": "Welcome to Relationship Court",
+    "description": "This platform helps you structure difficult conversations, understand different perspectives, and find constructive resolutions.",
+    "startCase": "Start a New Case",
+    "totalCases": "Total Cases",
+    "resolved": "Resolved",
+    "active": "Active",
+    "recentCases": "Recent Cases"
+  },
+  "case": {
+    "title": "Start a New Case",
+    "issue": "What is the issue or conflict?",
+    "yourPerspective": "Your perspective",
+    "theirPerspective": "Other person's perspective (if known)",
+    "optionalNote": "Optional - you can leave this blank if you don't know their perspective",
+    "cancel": "Cancel",
+    "submit": "Submit Case",
+    "confirmCancel": "You have unsaved changes. Are you sure you want to cancel?",
+    "success": {
+      "created": "Case created successfully!"
+    },
+    "errors": {
+      "issueRequired": "Please describe the issue",
+      "perspectiveRequired": "Please share your perspective",
+      "generic": "Failed to create case. Please try again."
+    }
+  },
+  "verdict": {
+    "title": "Relationship Court Verdict",
+    "caseDetails": "Case Details",
+    "issue": "Issue",
+    "yourPerspective": "Your Perspective",
+    "theirPerspective": "Their Perspective",
+    "resolution": "Resolution",
+    "recommendation": "Recommendation",
+    "courtsNotes": "Court's Notes",
+    "newCase": "Start New Case",
+    "back": "Back to Dashboard"
+  },
+  "about": {
+    "title": "About",
+    "content": "Relationship Court helps people resolve conflicts in a calm, structured, and fair way."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "data": "Data Management",
+    "export": {
+      "success": "Data exported successfully",
+      "error": "Failed to export data"
+    },
+    "clear": {
+      "success": "All data cleared",
+      "description": "Redirecting to home page...",
+      "error": "Failed to clear data",
+      "confirm": "Are you sure? This will permanently delete all your cases. This action cannot be undone."
+    }
+  }
+}
