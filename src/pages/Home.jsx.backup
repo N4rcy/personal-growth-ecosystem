@@ -138,7 +138,7 @@ const Home = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button
-                onClick={() => navigate("/advice")}
+                onClick={() => navigate("/court")}
                 className="px-8 py-3 text-lg bg-gradient-to-r from-primary-700 to-primary-800 hover:from-primary-800 hover:to-primary-900 text-white"
               >
                 <Scale className="mr-2 h-5 w-5" />
@@ -326,7 +326,7 @@ const Home = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={() => navigate("/advice")}
+              onClick={() => navigate("/court")}
               className="px-8 py-3 text-lg bg-gradient-to-r from-primary-700 to-primary-800 hover:from-primary-800 hover:to-primary-900 text-white"
             >
               Start Free Trial
@@ -377,7 +377,7 @@ const Home = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/advice")}
+              onClick={() => navigate("/court")}
               className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
             >
               Relationship Court

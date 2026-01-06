@@ -1,41 +1,42 @@
-import { callDeepSeekAPI } from "./deepseekApi";
+// Temporary stub file - imports redirected to aiService
+// This is to fix compilation errors while we update the components
 
-export async function generateAIAnalysis(caseData) {
-  // Format the case data for the AI
-  const prompt = `Analyze this relationship case and provide insights:
+import { getRelationshipAdvice } from './aiService';
 
-Title: ${caseData.title}
-Description: ${caseData.description}
-User's Role: ${caseData.metadata?.yourRole || "Not specified"}
-Other Person's Role: ${caseData.metadata?.theirRole || "Not specified"}
-Emotions: ${caseData.metadata?.emotions?.join(", ") || "None"}
-
-Please provide:
-1. Root cause analysis
-2. Communication advice
-3. Suggested next steps
-4. Empathy and understanding for both sides`;
-
+/**
+ * Temporary compatibility wrapper for old components
+ * @param {string|object} input - User input or case data
+ * @returns {Promise<string>} AI analysis
+ */
+export async function generateAIAnalysis(input) {
   try {
-    const response = await callDeepSeekAPI(prompt);
-    return response;
+    let textInput = input;
+    
+    // Handle different input formats
+    if (typeof input === 'object') {
+      if (input.description) {
+        textInput = input.description;
+      } else if (input.problem) {
+        textInput = input.problem;
+      } else if (input.title) {
+        textInput = input.title + (input.details ? '\n' + input.details : '');
+      } else {
+        textInput = JSON.stringify(input);
+      }
+    }
+    
+    console.log('generateAIAnalysis called with:', { input, textInput });
+    return await getRelationshipAdvice(textInput);
   } catch (error) {
-    console.error("Error generating AI analysis:", error);
-    return "Unable to generate analysis at this time. Please try again later.";
+    console.error('Error in generateAIAnalysis:', error);
+    return 'Unable to generate analysis at this time.';
   }
 }
 
-export function formatAnalysisResponse(text) {
-  // Parse the AI response into structured format
-  const sections = text.split(/\d\.\s+/).filter((section) => section.trim());
-
-  return {
-    rootCause: sections[0]?.trim() || text,
-    communicationAdvice: sections[1]?.trim() || "",
-    nextSteps: sections[2]?.trim() || "",
-    empathy: sections[3]?.trim() || "",
-  };
+/**
+ * Compatibility function for old code
+ */
+export function getMockAnalysis(caseData) {
+  console.warn('getMockAnalysis is deprecated, using fallback');
+  return `Analysis for: ${caseData.title || 'Untitled case'}\n\nThis feature has been updated. Please refresh the page for better AI analysis.`;
 }
-
-// Alias for backward compatibility
-export const analyzeWithAI = generateAIAnalysis;

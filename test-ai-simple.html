@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple AI Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { padding: 10px; margin: 5px; }
+        #result { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h2>Test AI in 1 Click</h2>
+    
+    <button onclick="testCase1()">Test Money Issue</button>
+    <button onclick="testCase2()">Test Time Issue</button>
+    <button onclick="testCase3()">Test Family Issue</button>
+    
+    <div id="result">Click a button to test...</div>
+    
+    <script>
+        async function callAI(prompt) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Calling AI...';
+            
+            // Try to use the same API as your app
+            const apiKey = localStorage.getItem('deepseek-api-key') || 'test';
+            
+            if (apiKey === 'test') {
+                resultDiv.innerHTML = '❌ No API key found. Add to localStorage: localStorage.setItem("deepseek-api-key", "your-key")';
+                return;
+            }
+            
+            try {
+                const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'deepseek-chat',
+                        messages: [{ role: 'user', content: prompt }],
+                        max_tokens: 300
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.innerHTML = `<strong>✅ Response:</strong><br>${data.choices[0].message.content}`;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `❌ Error: ${error.message}<br><br>
+                <strong>Mock Response:</strong><br>
+                ${prompt.includes('money') ? 'For money issues, try creating a budget together.' : 
+                  prompt.includes('time') ? 'For time issues, schedule regular date nights.' :
+                  'For family issues, set clear boundaries together.'}`;
+            }
+        }
+        
+        function testCase1() {
+            callAI("Give 2 specific tips for a couple arguing about money management.");
+        }
+        
+        function testCase2() {
+            callAI("Give 2 specific tips for a couple who never spend quality time together.");
+        }
+        
+        function testCase3() {
+            callAI("Give 2 specific tips for dealing with interfering in-laws.");
+        }
+    </script>
+</body>
+</html>

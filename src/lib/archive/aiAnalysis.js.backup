@@ -39,6 +39,3 @@ export function formatAnalysisResponse(text) {
 
 // Alias for backward compatibility
 export const analyzeWithAI = generateAIAnalysis;
-
-// Alias for backward compatibility
-export const analyzeWithAI = generateAIAnalysis;

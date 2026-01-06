@@ -1,171 +1,141 @@
-import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  Menu,
-  X,
-  Heart,
-  MessageSquare,
-  Brain,
-  Home,
-  Settings,
-  ChevronLeft,
-  Moon,
-  Sun,
-  Scale,
-} from "lucide-react";
-import { Button } from "./button";
-import { useTheme } from "../../context/ThemeContext";
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Button } from './button';
+import { Home, MessageSquare, Settings, Menu, X, LogOut, Moon, Sun } from 'lucide-react';
+import { useState } from 'react';
 
-const AppLayout = ({ children, showBackButton = false, onBack }) => {
+const navItems = [
+  { name: 'Relationship Insights', href: '/advice', icon: Home },
+  { name: 'English Lab', href: '/english-lab', icon: MessageSquare },
+  { name: 'Settings', href: '/settings', icon: Settings },
+];
+
+export default function AppLayout() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
-  const navigation = [
-    { name: "Home", href: "/", icon: Home },
-    { name: "Relationship Court", href: "/court", icon: Scale },
-    { name: "English Lab", href: "/english-lab", icon: MessageSquare },
-    { name: "Research Hub", href: "/study-tools", icon: Brain },
-    { name: "Settings", href: "/settings", icon: Settings },
-  ];
-
-  const isActive = (path) => location.pathname === path;
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (!darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center">
-              {showBackButton ? (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={onBack || (() => navigate(-1))}
-                  className="mr-2"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-              ) : (
-                <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-                >
-                  {mobileMenuOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </button>
-              )}
-
-              <Link to="/" className="ml-2 md:ml-0 flex items-center">
-                <Scale className="h-6 w-6 text-primary-600 dark:text-primary-400" />
-                <span className="ml-2 text-xl font-bold text-gray-900 dark:text-white">
-                  Growth
-                  <span className="text-primary-600 dark:text-primary-400">
-                    Tools
-                  </span>
-                </span>
-              </Link>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-1">
-              {navigation.map((item) => (
-                <Button
-                  key={item.name}
-                  asChild
-                  variant={isActive(item.href) ? "default" : "ghost"}
-                  className={`${
-                    isActive(item.href)
-                      ? "bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  <Link to={item.href}>
-                    <item.icon className="h-4 w-4 mr-2" />
-                    {item.name}
-                  </Link>
-                </Button>
-              ))}
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="ml-2 text-gray-700 dark:text-gray-300"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-
-            <div className="md:hidden flex items-center">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="text-gray-700 dark:text-gray-300"
-              >
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
+      {/* Mobile sidebar */}
+      <div className={`lg:hidden ${sidebarOpen ? 'fixed inset-0 z-50' : 'hidden'}`}>
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
+        <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white dark:bg-gray-800">
+          <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700">
+            <span className="text-lg font-semibold">Navigation</span>
+            <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(false)}>
+              <X className="h-5 w-5" />
+            </Button>
           </div>
-        </div>
-
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
-            <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
+          <nav className="flex-1 p-4 space-y-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.href || 
+                              (item.href === '/advice' && location.pathname === '/') ||
+                              (item.href === '/advice' && location.pathname === '/court');
+              return (
                 <Link
                   key={item.name}
                   to={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    isActive(item.href)
-                      ? "bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    isActive
+                      ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }`}
+                  onClick={() => setSidebarOpen(false)}
                 >
-                  <item.icon className="h-5 w-5 mr-3" />
+                  <Icon className="mr-3 h-5 w-5" />
                   {item.name}
                 </Link>
-              ))}
-            </div>
+              );
+            })}
+          </nav>
+          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <Button variant="outline" className="w-full" onClick={toggleDarkMode}>
+              {darkMode ? (
+                <>
+                  <Sun className="mr-2 h-4 w-4" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="mr-2 h-4 w-4" />
+                  Dark Mode
+                </>
+              )}
+            </Button>
           </div>
-        )}
-      </nav>
-
-      <main className="pt-16">{children}</main>
-
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-200 dark:border-gray-800">
-        <div className="flex justify-around items-center h-16">
-          {navigation.slice(0, 4).map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${
-                isActive(item.href)
-                  ? "text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-300"
-              }`}
-            >
-              <item.icon className="h-5 w-5" />
-              <span className="text-xs mt-1">{item.name}</span>
-            </Link>
-          ))}
         </div>
+      </div>
+
+      {/* Desktop sidebar */}
+      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
+        <div className="flex flex-col flex-1 border-r border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+          <div className="flex items-center h-16 px-4 border-b border-gray-200 dark:border-gray-700">
+            <span className="text-lg font-semibold">Relationship Insights</span>
+          </div>
+          <nav className="flex-1 p-4 space-y-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = location.pathname === item.href || 
+                              (item.href === '/advice' && location.pathname === '/') ||
+                              (item.href === '/advice' && location.pathname === '/court');
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive
+                      ? 'bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300'
+                      : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  }`}
+                >
+                  <Icon className="mr-3 h-5 w-5" />
+                  {item.name}
+                </Link>
+              );
+            })}
+          </nav>
+          <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+            <Button variant="outline" className="w-full" onClick={toggleDarkMode}>
+              {darkMode ? (
+                <>
+                  <Sun className="mr-2 h-4 w-4" />
+                  Light Mode
+                </>
+              ) : (
+                <>
+                  <Moon className="mr-2 h-4 w-4" />
+                  Dark Mode
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      {/* Main content */}
+      <div className="lg:pl-64">
+        <div className="sticky top-0 z-40 flex items-center h-16 px-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 lg:hidden">
+          <Button variant="ghost" size="sm" onClick={() => setSidebarOpen(true)}>
+            <Menu className="h-5 w-5" />
+          </Button>
+          <span className="ml-4 text-lg font-semibold">Relationship Insights</span>
+        </div>
+        <main className="py-6">
+          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <Outlet />
+          </div>
+        </main>
       </div>
     </div>
   );
-};
-
-export default AppLayout;
+}

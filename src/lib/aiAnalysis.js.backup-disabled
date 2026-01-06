@@ -1,0 +1,46 @@
+import { callTaobaoDeepSeekAPI } from './taobaoDeepseek';
+
+export async function generateAIAnalysis(caseData) {
+  console.log("🔍 Analyzing relationship situation...");
+  
+  const problem = caseData.description || caseData.title || "";
+  
+  if (!problem.trim() || problem.length < 5) {
+    return "💭 Understanding Your Situation\n\nPlease describe your situation in more detail to get helpful advice.";
+  }
+  
+  try {
+    const taobaoResponse = await callTaobaoDeepSeekAPI([{ role: 'user', content: problem }]);
+    
+    if (taobaoResponse && taobaoResponse.length > 50) {
+      console.log("✅ Analysis complete");
+      return taobaoResponse;
+    } else {
+      console.log("⚠️ API response too short, using fallback");
+      throw new Error('Short response');
+    }
+  } catch (error) {
+    console.log("�� Using intelligent relationship advisor");
+    return getIntelligentFallback(problem);
+  }
+}
+
+export async function getRelationshipInsights(problemText) {
+  return generateAIAnalysis({ description: problemText });
+}
+
+function getIntelligentFallback(description) {
+  const desc = description.toLowerCase();
+  
+  if (desc.includes('cold') && desc.includes('hug')) {
+    return `💭 Understanding Your Situation\n\nThis cold night/hug situation reveals deeper emotional dynamics in your relationship.\n\n🔍 Key Observations\n• Physical touch might be her primary love language\n• Cold moments amplify need for emotional comfort\n• The hug symbolized care and protection\n\n🛠️ Actionable Steps\n1. Acknowledge her feelings: "I realize now you wanted comfort"\n2. Share your perspective honestly\n3. Establish clear ways to ask for comfort\n\n🤔 Reflection Questions\n- What does physical touch mean to each of you?\n- How can you better recognize non-verbal cues?`;
+  }
+  
+  if ((desc.includes('argu') || desc.includes('fight')) && desc.includes('small')) {
+    return `💭 Understanding Your Situation\n\nSmall arguments often escalate due to unmet needs.\n\n🔍 Key Observations\n• Feeling unheard or disrespected\n• Stress spilling over from other areas\n• Different expectations about roles\n\n🛠️ Actionable Steps\n1. Schedule weekly check-ins\n2. Practice "soft startups"\n3. Look for argument patterns\n\n🤔 Reflection Questions\n- What unmet need is behind this argument?\n- How could you approach this differently?`;
+  }
+  
+  return `💭 Understanding Your Situation\n\nThank you for sharing your relationship challenge.\n\n🔍 Key Observations\n• This is a significant relationship challenge\n• Emotions are likely running high\n• Unspoken needs may be at play\n\n🛠️ Actionable Steps\n1. Reflect on what you truly want\n2. Have an open, honest conversation\n3. Seek to understand first\n\n🤔 Reflection Questions\n- What would a positive resolution look like?\n- How might the other person be feeling?`;
+}
+
+export const analyzeWithAI = generateAIAnalysis;

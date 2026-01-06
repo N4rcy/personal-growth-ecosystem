@@ -301,7 +301,7 @@ const Verdict = () => {
                 <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2">
                     <Brain className="h-5 w-5" />
-                    Expert Analysis & Verdict
+                    Relationship Advice & Verdict
                   </CardTitle>
                   <div className="flex items-center gap-2">
                     <Button
@@ -582,7 +582,7 @@ const Verdict = () => {
 
                 {caseData.analysis && (
                   <div className="flex items-center justify-between">
-                    <span className="text-sm">Expert Analysis Generated</span>
+                    <span className="text-sm">Relationship Advice Generated</span>
                     <span className="text-sm font-medium">
                       {new Date(
                         caseData.analysis.generatedAt

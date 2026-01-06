@@ -1,0 +1,125 @@
+// AI Analysis Function
+export async function generateAIAnalysis(caseData) {
+  console.log("🤖 Starting AI analysis for:", caseData.title);
+  
+  const apiKey = import.meta.env.VITE_DEEPSEEK_API_KEY;
+  
+  // Check if we have a real API key
+  if (!apiKey || apiKey === 'your_key_here') {
+    console.log("⚠️ No API key found, using mock responses");
+    return getMockResponse(caseData);
+  }
+  
+  try {
+    console.log("📡 Calling DeepSeek API...");
+    
+    const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: [{
+          role: 'user',
+          content: `Give 3 specific, actionable tips for this relationship issue: "${caseData.description}"`
+        }],
+        max_tokens: 300
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log("✅ AI response received");
+    return data.choices[0].message.content;
+    
+  } catch (error) {
+    console.error("❌ Error calling AI:", error);
+    return getMockResponse(caseData);
+  }
+}
+
+// Mock responses that are DIFFERENT for different cases
+function getMockResponse(caseData) {
+  const title = caseData.title.toLowerCase();
+  const desc = caseData.description.toLowerCase();
+  
+  console.log("🎭 Generating mock response for case:", title);
+  
+  // Money-related cases
+  if (title.includes('money') || desc.includes('money') || desc.includes('spend')) {
+    return `💰 MONEY ISSUE ANALYSIS:
+1. Create a "fun money" budget each gets to spend no questions asked
+2. Use cash envelopes for different spending categories
+3. Schedule a monthly money date to review finances over coffee`;
+  }
+  
+  // Time-related cases
+  else if (title.includes('time') || desc.includes('time') || desc.includes('busy')) {
+    return `⏰ TIME TOGETHER ANALYSIS:
+1. Implement "phone-free" hours from 7-9 PM daily
+2. Schedule a weekly "adventure hour" trying something new
+3. Use a shared calendar to block quality time first`;
+  }
+  
+  // Family-related cases
+  else if (title.includes('family') || desc.includes('family') || desc.includes('in-law')) {
+    return `👪 FAMILY BOUNDARIES ANALYSIS:
+1. Create a "united front" rule - all family feedback gets discussed privately first
+2. Set specific visiting hours/days for family
+3. Develop code words to signal when boundaries are being crossed`;
+  }
+  
+  // Communication-related cases
+  else if (title.includes('communicat') || desc.includes('talk') || desc.includes('argu')) {
+    return `🗣️ COMMUNICATION ANALYSIS:
+1. Try the "5-minute rule" - each speaks for 5 mins without interruption
+2. Use "I feel" statements: "I feel X when Y happens because Z"
+3. Schedule weekly "relationship check-ins" on Sundays`;
+  }
+  
+  // Default response
+  else {
+    return `🧠 ANALYSIS FOR "${caseData.title}":
+1. Identify one small change you can make this week
+2. Practice active listening - repeat back what you heard
+3. Focus on understanding, not winning the argument`;
+  }
+}
+
+// Simple formatter
+export function formatAnalysisResponse(analysis) {
+  console.log("📝 Formatting analysis response");
+  
+  // If analysis is already an object, return it
+  if (typeof analysis === 'object') {
+    return analysis;
+  }
+  
+  // If it's a string, create structured response
+  if (typeof analysis === 'string') {
+    return {
+      summary: analysis.split('\n')[0] || "Analysis generated successfully",
+      rootCause: "Communication or expectation mismatch",
+      communicationAdvice: "Use 'I feel' statements instead of 'You always'",
+      nextSteps: ["Try one suggestion this week", "Check in after 3 days", "Adjust approach as needed"],
+      empathy: "Remember that both partners want connection, even when expressing it differently"
+    };
+  }
+  
+  // Default fallback
+  return {
+    summary: "Analysis ready",
+    rootCause: "Common relationship challenge",
+    communicationAdvice: "Communicate openly and listen actively",
+    nextSteps: ["Start small", "Be consistent", "Celebrate progress"],
+    empathy: "All relationships require work and understanding"
+  };
+}
+
+// Alias for compatibility
+export const analyzeWithAI = generateAIAnalysis;
