@@ -10,18 +10,13 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
-    strictPort: true,
+    port: 3000,  // Changed from 5173 to 3000
+    host: true,
     proxy: {
       '/api': {
         target: 'http://localhost:3001',
         changeOrigin: true,
-        secure: false,
-      }
-    }
+      },
+    },
   },
-  build: {
-    outDir: 'dist',
-    sourcemap: false
-  }
 })

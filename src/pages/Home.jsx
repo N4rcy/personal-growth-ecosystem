@@ -33,80 +33,80 @@ const Home = () => {
   const modes = [
     {
       id: "relationship",
-      title: "Relationship Court",
-      icon: <Scale className="h-8 w-8" />,
-      color: "from-primary-500 to-primary-700",
-      description: "AI-powered conflict analysis for couples & friends",
-      features: ["Expert Analysis", "Mediation Scripts", "Progress Tracking"],
-      buttonText: "Enter Court",
-      path: "/court",
+      title: "Relationship Advice",
+      icon: <MessageSquare className="h-8 w-8" />,
+      color: "from-blue-500 to-blue-700",
+      description: "Get thoughtful, AI-powered relationship advice",
+      features: ["Empathetic Analysis", "Practical Suggestions", "Private & Secure"],
+      buttonText: "Get Advice",
+      path: "/app/advice",
     },
     {
       id: "english",
       title: "English Lab",
-      icon: <MessageSquare className="h-8 w-8" />,
-      color: "from-accent-500 to-accent-700",
-      description: "IELTS & English tutoring tools",
-      features: ["Essay Grading", "Speaking Practice", "Model Answers"],
+      icon: <BookOpen className="h-8 w-8" />,
+      color: "from-green-500 to-green-700",
+      description: "Practice English conversation skills",
+      features: ["Conversation Practice", "Vocabulary Builder", "IELTS Preparation"],
       buttonText: "Practice English",
-      path: "/english-lab",
+      path: "/app/english-lab",
     },
     {
-      id: "research",
-      title: "Research Hub",
-      icon: <Brain className="h-8 w-8" />,
-      color: "from-secondary-600 to-secondary-800",
-      description: "Mindfulness & psychology research tools",
-      features: ["Study Tools", "Data Tracking", "Resource Library"],
-      buttonText: "Explore Research",
-      path: "/study-tools",
+      id: "court",
+      title: "Relationship Court",
+      icon: <Scale className="h-8 w-8" />,
+      color: "from-purple-500 to-purple-700",
+      description: "Analyze relationship conflicts and patterns",
+      features: ["Case Analysis", "Progress Tracking", "Mediation Tools"],
+      buttonText: "Enter Court",
+      path: "/app/court",
     },
   ];
 
   const testimonials = [
     {
-      text: "This helped us resolve a 2-week argument in 30 minutes.",
-      author: "Alex & Sam",
-      role: "Couple, 2 years together",
+      text: "The AI gave me really thoughtful advice that helped me understand my partner better.",
+      author: "Alex",
+      role: "User, 2 months",
     },
     {
-      text: "My IELTS writing improved from 6.5 to 7.5 using the feedback.",
+      text: "Perfect for practicing difficult conversations in English before having them for real.",
       author: "Priya",
       role: "Student, India",
     },
     {
-      text: "The research tools saved me hours of literature review.",
-      author: "Dr. Chen",
-      role: "Psychology Researcher",
+      text: "Helped us resolve a recurring argument by showing us the pattern we were stuck in.",
+      author: "Sam & Taylor",
+      role: "Couple, 1 year together",
     },
   ];
 
   const features = [
     {
       icon: <Shield className="h-5 w-5" />,
-      text: "100% Private - All data stays on your device",
+      text: "100% Private - Your conversations stay private",
     },
     {
       icon: <Sparkles className="h-5 w-5" />,
-      text: "Expert Insights - Powered by DeepSeek AI",
+      text: "AI-Powered - Thoughtful, compassionate advice",
     },
     {
       icon: <Clock className="h-5 w-5" />,
-      text: "Fast Analysis - Get results in seconds",
+      text: "Instant Responses - Get advice in seconds",
     },
     {
       icon: <TrendingUp className="h-5 w-5" />,
-      text: "Track Progress - See relationship growth",
+      text: "Free Forever - No costs, no subscriptions",
     },
   ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setStats({
-        casesResolved: 12,
-        insightScore: 8.4,
-        patternsFound: 24,
-        avgResponseTime: "1.8 min",
+        casesResolved: 127,
+        insightScore: 8.9,
+        patternsFound: 42,
+        avgResponseTime: "1.5 min",
       });
     }, 1000);
     return () => clearTimeout(timer);
@@ -115,43 +115,43 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800">
       <div className="relative overflow-hidden pt-20 px-4">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 to-accent-500/5 dark:from-primary-500/10 dark:to-accent-500/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 dark:from-blue-500/10 dark:to-purple-500/10" />
 
         <div className="relative max-w-6xl mx-auto">
           <div className="text-center py-12 md:py-20">
-            <Badge className="mb-4 px-4 py-1.5 text-sm bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200">
+            <Badge className="mb-4 px-4 py-1.5 text-sm bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
               <Target className="h-3.5 w-3.5 mr-1.5" />
-              Expert-Powered Personal Growth
+              AI-Powered Relationship Guidance
             </Badge>
 
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-              Transform Your
-              <span className="block bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
-                Relationships & Growth
+              Find Clarity in Your
+              <span className="block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Relationships
               </span>
             </h1>
 
             <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-10">
-              Three powerful tools in one place: Expert relationship analysis,
-              English learning, and research assistance. All private, all free.
+              Get thoughtful, compassionate advice for your relationship challenges. 
+              Share your situation and receive AI-powered guidance that feels human.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button
-                onClick={() => navigate("/advice")}
-                className="px-8 py-3 text-lg bg-gradient-to-r from-primary-700 to-primary-800 hover:from-primary-800 hover:to-primary-900 text-white"
+                onClick={() => navigate("/app/advice")}
+                className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
               >
-                <Scale className="mr-2 h-5 w-5" />
-                Try Relationship Court
+                <MessageSquare className="mr-2 h-5 w-5" />
+                Get Free Advice
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
 
               <Button
-                onClick={() => navigate("/english-lab")}
+                onClick={() => navigate("/app/english-lab")}
                 variant="outline"
-                className="px-8 py-3 text-lg border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-500 hover:dark:border-primary-500"
+                className="px-8 py-3 text-lg border-2 border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 hover:dark:border-blue-500"
               >
-                Explore English Lab
+                Try English Lab
                 <ChevronRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
@@ -163,7 +163,7 @@ const Home = () => {
                 {stats.casesResolved}+
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                Cases Resolved
+                People Helped
               </div>
             </Card>
 
@@ -172,7 +172,7 @@ const Home = () => {
                 {stats.insightScore}/10
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                Avg Insight Score
+                Satisfaction Score
               </div>
             </Card>
 
@@ -181,7 +181,7 @@ const Home = () => {
                 {stats.patternsFound}
               </div>
               <div className="text-sm text-gray-600 dark:text-gray-400">
-                Patterns Found
+                Insights Generated
               </div>
             </Card>
 
@@ -199,18 +199,18 @@ const Home = () => {
 
       <div className="max-w-6xl mx-auto px-4 pb-20">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-4">
-          Choose Your Growth Tool
+          Choose Your Tool
         </h2>
         <p className="text-gray-600 dark:text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-          Select from three specialized tools designed to help you grow in
-          different areas of life.
+          Select from our specialized tools designed to help with different aspects 
+          of personal growth and relationships.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8 mb-20">
           {modes.map((mode) => (
             <Card
               key={mode.id}
-              className="group relative overflow-hidden border-2 border-gray-200 dark:border-gray-800 hover:border-primary-300 dark:hover:border-primary-700 transition-all duration-300 hover:shadow-xl bg-white dark:bg-gray-800"
+              className="group relative overflow-hidden border-2 border-gray-200 dark:border-gray-800 hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300 hover:shadow-xl bg-white dark:bg-gray-800"
             >
               <div
                 className={`absolute inset-0 bg-gradient-to-br ${mode.color} opacity-5 group-hover:opacity-10 transition-opacity`}
@@ -245,7 +245,7 @@ const Home = () => {
 
                 <Button
                   onClick={() => navigate(mode.path)}
-                  className="w-full group-hover:scale-105 transition-transform bg-gradient-to-r from-primary-700 to-primary-800 hover:from-primary-800 hover:to-primary-900 text-white"
+                  className="w-full group-hover:scale-105 transition-transform bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                 >
                   {mode.buttonText}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -257,7 +257,7 @@ const Home = () => {
 
         <div className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-            Why Choose This Platform
+            Why Choose Relationship Insights
           </h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -266,7 +266,7 @@ const Home = () => {
                 key={index}
                 className="flex flex-col items-center text-center p-6"
               >
-                <div className="p-3 rounded-full bg-primary-100 dark:bg-primary-900 text-primary-600 dark:text-primary-300 mb-4">
+                <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 mb-4">
                   {feature.icon}
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 font-medium">
@@ -314,36 +314,36 @@ const Home = () => {
           </div>
         </div>
 
-        <Card className="p-8 md:p-12 text-center bg-gradient-to-r from-primary-50 to-accent-50 dark:from-gray-800 dark:to-gray-900 border-gray-200 dark:border-gray-700">
+        <Card className="p-8 md:p-12 text-center bg-gradient-to-r from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 border-gray-200 dark:border-gray-700">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Ready to Transform Your Growth Journey?
+            Ready to Get Started?
           </h2>
 
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Join thousands who have improved their relationships, language
-            skills, and research with our expert-powered tools.
+            Join others who have found clarity and better understanding through our platform.
+            No sign up required - start getting advice immediately.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={() => navigate("/advice")}
-              className="px-8 py-3 text-lg bg-gradient-to-r from-primary-700 to-primary-800 hover:from-primary-800 hover:to-primary-900 text-white"
+              onClick={() => navigate("/app/advice")}
+              className="px-8 py-3 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
             >
-              Start Free Trial
+              Get Free Advice Now
             </Button>
 
             <Button
-              onClick={() => navigate("/settings")}
+              onClick={() => navigate("/app")}
               variant="outline"
-              className="px-8 py-3 text-lg border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-primary-500 hover:dark:border-primary-500"
+              className="px-8 py-3 text-lg border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 hover:dark:border-blue-500"
             >
               <Users className="mr-2 h-5 w-5" />
-              See How It Works
+              Explore All Features
             </Button>
           </div>
 
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-6">
-            No credit card required • Free forever plan available
+            100% Free • No Credit Card • No Account Required
           </p>
         </Card>
       </div>
@@ -352,16 +352,16 @@ const Home = () => {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <div className="flex items-center">
-              <Scale className="h-6 w-6 text-primary-600 dark:text-primary-400 mr-2" />
+              <MessageSquare className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-2" />
               <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Growth
-                <span className="text-primary-600 dark:text-primary-400">
-                  Tools
+                Relationship
+                <span className="text-blue-600 dark:text-blue-400">
+                  Insights
                 </span>
               </span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-              © 2024 All rights reserved • Built with ❤️
+              © 2024 All rights reserved • Built with care
             </p>
           </div>
 
@@ -369,24 +369,24 @@ const Home = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/settings")}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+              onClick={() => navigate("/app/settings")}
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               Settings
             </Button>
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/advice")}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+              onClick={() => navigate("/app/advice")}
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
-              Relationship Court
+              Get Advice
             </Button>
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate("/english-lab")}
-              className="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400"
+              onClick={() => navigate("/app/english-lab")}
+              className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
             >
               English Lab
             </Button>
